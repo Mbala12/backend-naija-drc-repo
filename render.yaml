@@ -29,3 +29,5 @@ services:
       # (Render redeploys automatically on env var changes).
       - key: Cors__AllowedOrigins__0
         value: https://your-app.vercel.app
+      - key: Swagger__Enabled
+        value: "true"
