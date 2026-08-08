@@ -6,7 +6,7 @@ databases:
 
 services:
   - type: web
-    name: consular-api
+    name: naija-drc-embassy-api
     runtime: docker
     dockerfilePath: ./Consular.Api/Dockerfile
     dockerContext: .
