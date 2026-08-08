@@ -1,0 +1,31 @@
+databases:
+  - name: consular-postgres
+    databaseName: consular
+    user: consular_app
+    plan: free
+
+services:
+  - type: web
+    name: consular-api
+    runtime: docker
+    dockerfilePath: ./Consular.Api/Dockerfile
+    dockerContext: .
+    plan: free
+    healthCheckPath: /health/live
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ConnectionStrings__Postgres
+        fromDatabase:
+          name: consular-postgres
+          property: connectionString
+      - key: Jwt__SigningKey
+        generateValue: true
+      - key: Jwt__Issuer
+        value: consular-api
+      - key: Jwt__ExpiryMinutes
+        value: "480"
+      # Placeholder — after your Vercel deploy gets a real URL, replace this and save
+      # (Render redeploys automatically on env var changes).
+      - key: Cors__AllowedOrigins__0
+        value: https://your-app.vercel.app
