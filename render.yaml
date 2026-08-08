@@ -6,7 +6,7 @@ databases:
 
 services:
   - type: web
-    name: consular-api
+    name: drc-consular-api
     runtime: docker
     dockerfilePath: ./Consular.Api/Dockerfile
     dockerContext: .
@@ -22,7 +22,7 @@ services:
       - key: Jwt__SigningKey
         generateValue: true
       - key: Jwt__Issuer
-        value: consular-api
+        value: drc-consular-api
       - key: Jwt__ExpiryMinutes
         value: "480"
       # Placeholder — after your Vercel deploy gets a real URL, replace this and save
