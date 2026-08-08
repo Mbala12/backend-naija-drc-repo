@@ -114,7 +114,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    // Lets Swagger UI's "Authorize" button attach a Bearer token to requests against
+    // Let Swagger UI's "Authorize" button attach a Bearer token to requests against
     // [Authorize]-protected endpoints — without this, the login response's JWT has no
     // way to reach subsequent calls made from the UI, and every protected endpoint 401s.
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -185,9 +185,10 @@ builder.Services.AddRateLimiter(options =>
 // /health/live to decide whether to restart it. Separating the two matters: a pod with a
 // slow DB should stop receiving traffic (fail readiness) without being killed (still live).
 builder.Services.AddHealthChecks()
-    .AddNpgSql(builder.Configuration.GetConnectionString("Postgres")!, name: "postgres");
+    //.AddNpgSql(builder.Configuration.GetConnectionString("Postgres")!, name: "postgres");
+    .AddNpgSql(postgresConnectionString, name: "postgres");
 
-// Periodically auto-rejects any demande that's sat in MISSING_DOCUMENTS past its 10-working-day
+// Periodically auto-rejects any demand that's sat in MISSING_DOCUMENTS past its 10-working-day
 // deadline without the applicant resubmitting — see MissingDocumentsExpiryService for why this
 // needs a background sweep rather than only the existing reactive deadline check.
 builder.Services.AddHostedService<MissingDocumentsExpiryService>();
